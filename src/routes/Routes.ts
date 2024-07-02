@@ -1,13 +1,13 @@
 import oEnvironment from '../constants/Environment';
 import express from 'express';
 import { AuthMiddleware } from '../middleware/AuthMiddleware';
+import Users from './Users';
 
 const routes = (app: express.Application) => {
-  // Rutas con autenticación
-  app.use(`${oEnvironment.URL_API}admin`, AuthMiddleware, require('./Users'));
 
-  // Rutas sin autenticación
-  app.use(`${oEnvironment.URL_API}admin`, require('./Users'));
+  app.use(`${oEnvironment.URL_API}admin`, AuthMiddleware, Users);
+
+  app.use(`${oEnvironment.URL_API}admin`, Users);
 };
 
-export { routes }; // Exportamos 'routes' para poder importarlo correctamente en otros archivos
+export default routes;

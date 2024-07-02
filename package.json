@@ -4,7 +4,9 @@
   "description": "API de plataforma administrativa para Independiente Futbol Club de Puntas de Valdez",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "nodemon index.js",
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

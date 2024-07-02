@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import oEnvironment from './constants/Environment';
-import { routes } from './routes/Routes'; // Asumiendo que 'Routes' exporta 'routes'
+import  routes from './routes/Routes'; 
 
 const app: Express = express();
 

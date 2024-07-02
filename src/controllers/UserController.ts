@@ -3,8 +3,8 @@ import { NOT_VALID, NOT_FOUND, DONE, CONFLICT } from '../constants/StatusCode';
 import bcrypt from 'bcryptjs';
 import User, { IUser } from '../models/User';
 import Controller from '../controllers/Controller';
-import { TokenGenerator, BASE16 } from 'uuid-token-generator';
-const oTokenGenerator = new TokenGenerator(256, BASE16);
+import TokenGenerator from 'uuid-token-generator';
+const oTokenGenerator = new TokenGenerator(256, TokenGenerator.BASE62);
 
 /**
  * Principal modelo a ser usado por el controlador
