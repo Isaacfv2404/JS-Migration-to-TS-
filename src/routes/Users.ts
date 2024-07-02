@@ -20,4 +20,4 @@ oRouter.get('/token', (oRequest, oResponse) => {
   Controller.checkToken(oRequest, oResponse);
 });
 
-module.exports = oRouter;
+export default oRouter;

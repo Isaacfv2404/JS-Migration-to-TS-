@@ -1,16 +1,17 @@
-const { PERMISSIONS } = require('../constants/StatusCode.js');
-const UserController = require('../controllers/UserController.js');
+import { PERMISSIONS } from "../constants/StatusCode";
+import UserController from "../controllers/UserController";
+
 const Controller = new UserController();
 
 /**
  * Middleware encargado de la autenticación y permisos sobre cada ruta del sistema
  */
-export const AuthMiddleware = (oRequest:any, oResponse:any, oNext:any) => {
+export const AuthMiddleware = (oRequest: any, oResponse: any, oNext: any) => {
   let sToken = oRequest.headers.authorization;
   try {
     if (!sToken)
       return Controller.respond(oResponse, PERMISSIONS);
-    Controller.findByToken(sToken, (oUser = null, bIsError = false) => {
+    Controller.findByToken(sToken, (oUser, bIsError = false) => {
       if (!bIsError && oUser) {
         oRequest.oUser = oUser;
         return oNext();
@@ -18,6 +19,10 @@ export const AuthMiddleware = (oRequest:any, oResponse:any, oNext:any) => {
       return Controller.respond(oResponse, PERMISSIONS);
     });
   } catch (oException) {
-    return Controller.respond(oResponse, PERMISSIONS, null, oException);
+    if (typeof oException === 'string' || typeof oException === 'object' || oException === null || oException === undefined) {
+      return Controller.respond(oResponse, PERMISSIONS, null, oException);
+    } else {
+      return Controller.respond(oResponse, PERMISSIONS, null, 'Unknown error');
+    }
   }
-}
+};

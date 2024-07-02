@@ -16,13 +16,13 @@ class Log extends Model {
    * 
    * @param {number} nType Tipo de registro, indica cual pagina se intentaba scrapear
    * @param {string} sMessage Mensaje que brinda informacion del lugar donde surguio el problema
-   * @param {object} oException Objeto error
+   * @param {string | object} oException Objeto error
    * @param {string} sArchive Nombre del archivo en el cual surge el problema
    * @param {string} sFunction Nombre de la función donde se obtiene el problema
    * 
    * @author Leandro Curbelo
    */
-  save = (nType:number, sMessage:string, oException = null, sArchive = null, sFunction = null) => {
+  save = (nType:number, sMessage:string, oException: string | object | null = null, sArchive:string, sFunction:string) => {
     let sSql = `INSERT INTO ${this.sTable} (
         type,
         message,
